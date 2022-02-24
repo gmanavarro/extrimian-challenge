@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { startBlockchainConnection } from './services/api';
+import 'antd/dist/antd.css';
 startBlockchainConnection();
 
 ReactDOM.render(

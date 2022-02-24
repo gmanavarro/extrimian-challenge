@@ -1,25 +1,25 @@
 import { getMessage, setMessage } from './services/api';
 import { useState } from 'react';
 
+import Header from './components/Header';
+import Content from './components/Content';
+
 function App() {
   const [messageText, setMessageText] = useState('');
   const [inputValue, setInputValue] = useState(messageText);
 
-  const handleSubmit = async (message) => {
-    await setMessage(message);
-    setMessageText(await getMessage());
-  };
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
   return (
-    <div className="App">
-      <div>
-        <input onChange={handleInputChange} type="text" />
-        <button onClick={() => handleSubmit(inputValue)}>Click me</button>
-      </div>
-      <h2>{messageText}</h2>
+    <div
+      className="App"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100vw',
+        height: '100vw',
+      }}
+    >
+      <Header />
+      <Content />
     </div>
   );
 }
