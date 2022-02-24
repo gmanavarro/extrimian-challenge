@@ -28,7 +28,7 @@ services:
       - REACT_APP_NETWORK_ID=${NETWORK_ID}
       - PORT=${DAPP_PORT}
     volumes:
-      - ./dapp:/dapp
+#      - ./dapp:/dapp
       - contracts:/dapp/src/contracts
 
 volumes:
