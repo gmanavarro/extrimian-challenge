@@ -7,7 +7,7 @@ services:
     ports:
       - ${GANACHE_PORT}:${GANACHE_PORT}
 
-  contract-deploy:
+  contract-deployer:
     depends_on:
       - ganache
     build:
