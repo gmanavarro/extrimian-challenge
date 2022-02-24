@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  ganache:
+    image: trufflesuite/ganache-cli
+    ports:
+      - '8545:8545'
+
+  contract-deploy:
+    depends_on:
+      - ganache
+    build:
+      context: ./blockchain
+      dockerfile: Dockerfile
+    volumes:
+      - contracts:/blockchain/build/contracts
+
+  dapp:
+    depends_on:
+      - ganache
+      - contract-deploy
+    build:
+      context: ./dapp
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - contracts:/dapp/contracts
+
+volumes:
+  contracts:
+    driver: local
