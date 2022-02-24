@@ -9,7 +9,7 @@ contract ExtrimianChallenge {
         return message;
     }
 
-    function updateGreeting(string memory newMessage) external {
+    function setMessage(string memory newMessage) external {
         message = newMessage;
     }
 }
