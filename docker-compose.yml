@@ -3,29 +3,33 @@ version: '3'
 services:
   ganache:
     image: trufflesuite/ganache-cli
+    command: ganache -p ${GANACHE_PORT} -i ${NETWORK_ID}
     ports:
-      - '8545:8545'
+      - ${GANACHE_PORT}:${GANACHE_PORT}
 
   contract-deploy:
     depends_on:
       - ganache
     build:
       context: ./blockchain
-      dockerfile: Dockerfile
+      args:
+        - NETWORK_ID=${NETWORK_ID}
+
     volumes:
       - contracts:/blockchain/build/contracts
 
   dapp:
-    depends_on:
-      - ganache
-      - contract-deploy
     build:
       context: ./dapp
-      dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - ${DAPP_PORT}:${DAPP_PORT}
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_NETWORK_ID=${NETWORK_ID}
+      - PORT=${DAPP_PORT}
     volumes:
-      - contracts:/dapp/contracts
+      - ./dapp:/dapp
+      - contracts:/dapp/src/contracts
 
 volumes:
   contracts:
