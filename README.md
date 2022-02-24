@@ -14,6 +14,7 @@ Utilicé 3 containers:
 - Truffle
 - Ganache
 - React
+- Ethers
 ## Implementación
 Para levantar el proyecto, se requiere tener **Docker** instalado.  
 Los valores por defecto utilizados son:
